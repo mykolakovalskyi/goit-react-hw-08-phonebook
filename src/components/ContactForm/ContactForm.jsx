@@ -3,6 +3,7 @@ import css from './ContactForm.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectContacts } from 'redux/contacts/selectors';
 import { addContact } from 'redux/contacts/operations';
+import { toast } from 'react-hot-toast';
 
 export default function ContactForm() {
   const [name, setName] = useState('');
@@ -29,7 +30,7 @@ export default function ContactForm() {
     if (!nameCheckingArray.includes(name)) {
       dispatch(addContact(newContact));
     } else {
-      alert(`${name} is already in contacts`);
+      toast.error(`${name} is already in contacts`);
     }
 
     reset();

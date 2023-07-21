@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchContacts, addContact, deleteContact } from './operations';
 import { logOut } from '../auth/operations';
+import { toast } from 'react-hot-toast';
 
 const handlePending = state => {
   state.loading = true;
@@ -8,6 +9,7 @@ const handlePending = state => {
 const handleRejected = (state, action) => {
   state.loading = false;
   state.error = action.payload;
+  toast.error(`${state.error}`);
 };
 
 const contactsSlice = createSlice({
