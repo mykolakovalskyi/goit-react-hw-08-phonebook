@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { logOut } from 'redux/auth/operations';
+import { Button } from '@mui/material';
 import { useAuth } from 'hooks';
 import css from './UserMenu.module.css';
 
@@ -10,9 +11,14 @@ export const UserMenu = () => {
   return (
     <div className={css.wrapper}>
       <p className={css.email}> {user.email}</p>
-      <button type="button" onClick={() => dispatch(logOut())}>
+      <Button
+        variant="contained"
+        color="primary"
+        type="button"
+        onClick={() => dispatch(logOut())}
+      >
         Logout
-      </button>
+      </Button>
     </div>
   );
 };

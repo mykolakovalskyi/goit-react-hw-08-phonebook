@@ -1,12 +1,11 @@
-.deleteButton {
-  border-radius: 7px;
-  background-color: white;
-  color: #0a0131ab;
-  border-color: #0a0131ab;
-}
-
-.deleteButton:hover {
-  border-color: #0a0131ab;
-  background-color: #0a0131ab;
-  color: white;
+.wrapper {
+  width: 320px;
+  margin: 25px auto;
+  border: 1px solid black;
+  padding: 15px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
 }

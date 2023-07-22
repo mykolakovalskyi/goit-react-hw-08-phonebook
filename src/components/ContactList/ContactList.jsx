@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectFilteredContacts } from 'redux/filter/selectors';
 import { deleteContact } from 'redux/contacts/operations';
 import css from './ContactList.module.css';
+import { Button } from '@mui/material';
 
 export default function ContactList() {
   const contacts = useSelector(selectFilteredContacts);
@@ -14,18 +15,21 @@ export default function ContactList() {
   };
 
   return (
-    <ul>
+    <ul className={css.wrapper}>
       {contacts.map(contact => {
         return (
           <li key={contact.id}>
             {contact.name}: {contact.number}{' '}
-            <button
+            <Button
+              size="small"
               id={contact.id}
+              variant="contained"
+              color="primary"
+              type="button"
               onClick={deleteSelectedContact}
-              className={css.deleteButton}
             >
               Delete
-            </button>
+            </Button>
           </li>
         );
       })}

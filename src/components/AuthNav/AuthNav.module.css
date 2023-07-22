@@ -4,8 +4,14 @@
   padding: 12px;
   font-weight: 700;
   color: #2a363b;
+  font-size: 22px;
+  transition: color 0.3s ease-in-out;
 }
 
 .link.active {
-  color: #e84a5f;
+  color: #e55d87;
+}
+
+.link:hover {
+  color: #e55d87;
 }

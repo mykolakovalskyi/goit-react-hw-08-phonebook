@@ -1,31 +1,22 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import css from './ContactForm.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectContacts } from 'redux/contacts/selectors';
 import { addContact } from 'redux/contacts/operations';
 import { toast } from 'react-hot-toast';
+import { Box, Stack, TextField, Button } from '@mui/material';
 
 export default function ContactForm() {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
-
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
-
-  const handleChange = e => {
-    const { name, value } = e.target;
-
-    if (name === 'name') {
-      setName(value);
-    }
-    if (name === 'number') {
-      setNumber(value);
-    }
-  };
+  const nameInputRef = useRef(null);
+  const numberInputRef = useRef(null);
 
   const handleSubmit = e => {
     e.preventDefault();
-    let newContact = { name, number };
+    const name = nameInputRef.current.value;
+    const number = numberInputRef.current.value;
+    const newContact = { name, number };
     let nameCheckingArray = contacts.map(contact => contact.name);
     if (!nameCheckingArray.includes(name)) {
       dispatch(addContact(newContact));
@@ -33,41 +24,42 @@ export default function ContactForm() {
       toast.error(`${name} is already in contacts`);
     }
 
-    reset();
-  };
-
-  const reset = () => {
-    setName('');
-    setNumber('');
+    nameInputRef.current.value = '';
+    numberInputRef.current.value = '';
   };
 
   return (
-    <form onSubmit={handleSubmit} className={css.contactForm}>
-      <label htmlFor="name">Name</label>
-      <input
-        type="text"
-        name="name"
-        id="name"
-        value={name}
-        onChange={handleChange}
-        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-        required
-        placeholder="Jacob Mercer"
-      />
-      <label htmlFor="number">Number</label>
-      <input
-        type="tel"
-        name="number"
-        id="number"
-        value={number}
-        onChange={handleChange}
-        title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-        required
-        placeholder="000-00-00"
-      />
-      <button type="submit" className={css.submitButton}>
-        Add contact
-      </button>
-    </form>
+    <div className={css.wrapper}>
+      <Box onSubmit={handleSubmit} component="form" autoComplete="off">
+        <Stack direction={'column'} spacing={3}>
+          <TextField
+            fullWidth
+            required
+            id="standard-basic"
+            label="Name"
+            variant="standard"
+            type="text"
+            name="name"
+            color="primary"
+            inputRef={nameInputRef}
+          />
+          <TextField
+            fullWidth
+            required
+            id="standard-basic"
+            label="Number"
+            variant="standard"
+            type="tel"
+            name="number"
+            color="primary"
+            inputRef={numberInputRef}
+          />
+
+          <Button variant="contained" color="primary" type="submit">
+            Add contact
+          </Button>
+        </Stack>
+      </Box>
+    </div>
   );
 }

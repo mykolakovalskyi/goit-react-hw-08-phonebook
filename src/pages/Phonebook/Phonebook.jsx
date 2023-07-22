@@ -7,6 +7,7 @@ import Filter from 'components/Filter/Filter';
 import { fetchContacts } from 'redux/contacts/operations';
 import { selectError, selectLoading } from 'redux/contacts/selectors';
 import { selectFilteredContacts } from 'redux/filter/selectors';
+import css from './Phonebook.module.css';
 
 export default function Phonebook() {
   const dispatch = useDispatch();
@@ -27,14 +28,16 @@ export default function Phonebook() {
         <Helmet>
           <title>Your Phonebook</title>
         </Helmet>
-        <h2>Phonebook</h2>
+        <h2 className={css.title}>Phonebook</h2>
         <ContactForm />
-        <h3>Contacts</h3>
+        <h2 className={css.title}>Contacts</h2>
         <Filter />
         {loading && !error ? (
-          <b>Request in progress...</b>
+          <b className={css.message}>Request in progress...</b>
         ) : contacts.length === 0 && !error ? (
-          <p>The Phonebook is empty. Add your first contact.</p>
+          <p className={css.message}>
+            The Phonebook is empty. Add your first contact.
+          </p>
         ) : (
           <ContactList />
         )}

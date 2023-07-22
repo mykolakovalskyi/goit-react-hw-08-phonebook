@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { setFilter } from 'redux/filter/filterSlice';
 import css from './Filter.module.css';
+import { TextField, InputAdornment } from '@mui/material';
 
 export default function Filter() {
   const dispatch = useDispatch();
@@ -12,16 +13,16 @@ export default function Filter() {
 
   return (
     <div className={css.filter}>
-      <label htmlFor="filter" className={css.filterLabel}>
-        Find contact by name
-      </label>
-      <input
-        type="text"
-        name="filter"
-        id="filter"
+      <TextField
         onChange={setContactFilter}
-        className={css.filterInput}
-      ></input>
+        fullWidth
+        id="input-with-icon-textfield"
+        placeholder="Search by name"
+        type="text"
+        variant="standard"
+        name="filter"
+        color="primary"
+      />
     </div>
   );
 }
