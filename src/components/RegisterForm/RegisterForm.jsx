@@ -38,7 +38,7 @@ export const RegisterForm = () => {
             required
             id="outlined-required"
             label="Username"
-            name="username"
+            name="name"
             variant="filled"
             color="primary"
           />
